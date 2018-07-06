@@ -1,0 +1,1046 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{model\_training}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Follow-Me Project}\label{follow-me-project}
+
+Congratulations on reaching the final project of the Robotics
+Nanodegree!
+
+Previously, you worked on the Semantic Segmentation lab where you built
+a deep learning network that locates a particular human target within an
+image. For this project, you will utilize what you implemented and
+learned from that lab and extend it to train a deep learning model that
+will allow a simulated quadcopter to follow around the person that it
+detects!
+
+Most of the code below is similar to the lab with some minor
+modifications. You can start with your existing solution, and modify and
+improve upon it to train the best possible model for this task.
+
+You can click on any of the following to quickly jump to that part of
+this notebook: 1. Section \ref{data} 2. Section \ref{fcn} 3.
+Section \ref{build} 4. Section \ref{training} 5.
+Section \ref{prediction} 6. Section \ref{evaluation}
+
+    \subsection{Data Collection}\label{data-collection}
+
+We have provided you with a starting dataset for this project. Download
+instructions can be found in the README for this project's repo.
+Alternatively, you can collect additional data of your own to improve
+your model. Check out the "Collecting Data" section in the Project
+Lesson in the Classroom for more details!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{glob}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+         
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{misc}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{contrib}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{python} \PY{k}{import} \PY{n}{keras}
+         \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{contrib}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{python}\PY{n+nn}{.}\PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}\PY{p}{,} \PY{n}{models}
+         
+         \PY{k+kn}{from} \PY{n+nn}{tensorflow} \PY{k}{import} \PY{n}{image}
+         
+         \PY{k+kn}{from} \PY{n+nn}{utils} \PY{k}{import} \PY{n}{scoring\PYZus{}utils}
+         \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{separable\PYZus{}conv2d} \PY{k}{import} \PY{n}{SeparableConv2DKeras}\PY{p}{,} \PY{n}{BilinearUpSampling2D}
+         \PY{k+kn}{from} \PY{n+nn}{utils} \PY{k}{import} \PY{n}{data\PYZus{}iterator}
+         \PY{k+kn}{from} \PY{n+nn}{utils} \PY{k}{import} \PY{n}{plotting\PYZus{}tools} 
+         \PY{k+kn}{from} \PY{n+nn}{utils} \PY{k}{import} \PY{n}{model\PYZus{}tools}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{All right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+All right
+
+    \end{Verbatim}
+
+    \subsection{FCN Layers }\label{fcn-layers}
+
+In the Classroom, we discussed the different layers that constitute a
+fully convolutional network (FCN). The following code will introduce you
+to the functions that you need to build your semantic segmentation
+model.
+
+    \subsubsection{Separable Convolutions}\label{separable-convolutions}
+
+The Encoder for your FCN will essentially require separable convolution
+layers, due to their advantages as explained in the classroom. The 1x1
+convolution layer in the FCN, however, is a regular convolution.
+Implementations for both are provided below for your use. Each includes
+batch normalization with the ReLU activation function applied to the
+layers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{separable\PYZus{}conv2d\PYZus{}batchnorm}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{,} \PY{n}{filters}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{SeparableConv2DKeras}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{n}{filters}\PY{p}{,}\PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{n}{strides}\PY{p}{,}
+                                      \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{)}
+             
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{BatchNormalization}\PY{p}{(}\PY{p}{)}\PY{p}{(}\PY{n}{output\PYZus{}layer}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{returned output\PYZus{}layer of separable\PYZus{}conv2d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{output\PYZus{}layer}
+         
+         \PY{k}{def} \PY{n+nf}{conv2d\PYZus{}batchnorm}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{,} \PY{n}{filters}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{n}{filters}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{n}{kernel\PYZus{}size}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{n}{strides}\PY{p}{,} 
+                               \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{)}
+             
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{BatchNormalization}\PY{p}{(}\PY{p}{)}\PY{p}{(}\PY{n}{output\PYZus{}layer}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{returned output\PYZus{}layer of conv2d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{output\PYZus{}layer}
+\end{Verbatim}
+
+
+    \subsubsection{Bilinear Upsampling}\label{bilinear-upsampling}
+
+The following helper function implements the bilinear upsampling layer.
+Upsampling by a factor of 2 is generally recommended, but you can try
+out different factors as well. Upsampling is used in the decoder block
+of the FCN.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{bilinear\PYZus{}upsample}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{)}\PY{p}{:}
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{BilinearUpSampling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{)}
+             \PY{k}{return} \PY{n}{output\PYZus{}layer}
+\end{Verbatim}
+
+
+    \subsection{Build the Model }\label{build-the-model}
+
+In the following cells, you will build an FCN to train a model to detect
+and locate the hero target within an image. The steps are: - Create an
+\texttt{encoder\_block} - Create a \texttt{decoder\_block} - Build the
+FCN consisting of encoder block(s), a 1x1 convolution, and decoder
+block(s). This step requires experimentation with different numbers of
+layers and filter sizes to build your model.
+
+    \subsubsection{Encoder Block}\label{encoder-block}
+
+Create an encoder block that includes a separable convolution layer
+using the \texttt{separable\_conv2d\_batchnorm()} function. The
+\texttt{filters} parameter defines the size or depth of the output
+layer. For example, 32 or 64.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{encoder\PYZus{}block}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{,} \PY{n}{filters}\PY{p}{,} \PY{n}{strides}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} TODO Create a separable convolution layer using the separable\PYZus{}conv2d\PYZus{}batchnorm() function.}
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{separable\PYZus{}conv2d\PYZus{}batchnorm}\PY{p}{(}\PY{n}{input\PYZus{}layer}\PY{p}{,} \PY{n}{filters}\PY{p}{,} \PY{n}{strides}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{output\PYZus{}layer}
+\end{Verbatim}
+
+
+    \subsubsection{Decoder Block}\label{decoder-block}
+
+The decoder block is comprised of three parts: - A bilinear upsampling
+layer using the upsample\_bilinear() function. The current recommended
+factor for upsampling is set to 2. - A layer concatenation step. This
+step is similar to skip connections. You will concatenate the upsampled
+small\_ip\_layer and the large\_ip\_layer. - Some (one or two)
+additional separable convolution layers to extract some more spatial
+information from prior layers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{decoder\PYZus{}block}\PY{p}{(}\PY{n}{small\PYZus{}ip\PYZus{}layer}\PY{p}{,} \PY{n}{large\PYZus{}ip\PYZus{}layer}\PY{p}{,} \PY{n}{filters}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} TODO Upsample the small input layer using the bilinear\PYZus{}upsample() function.}
+             \PY{n}{upsample} \PY{o}{=} \PY{n}{bilinear\PYZus{}upsample}\PY{p}{(}\PY{n}{small\PYZus{}ip\PYZus{}layer}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} TODO Concatenate the upsampled and large input layers using layers.concatenate}
+             \PY{n}{concatenated} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{upsample}\PY{p}{,} \PY{n}{large\PYZus{}ip\PYZus{}layer}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} TODO Add some number of separable convolution layers}
+             \PY{n}{convolution} \PY{o}{=} \PY{n}{separable\PYZus{}conv2d\PYZus{}batchnorm}\PY{p}{(}\PY{n}{concatenated}\PY{p}{,} \PY{n}{filters}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{separable\PYZus{}conv2d\PYZus{}batchnorm}\PY{p}{(}\PY{n}{convolution}\PY{p}{,} \PY{n}{filters}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{output\PYZus{}layer}
+\end{Verbatim}
+
+
+    \subsubsection{Model}\label{model}
+
+Now that you have the encoder and decoder blocks ready, go ahead and
+build your FCN architecture!
+
+There are three steps: - Add encoder blocks to build the encoder layers.
+This is similar to how you added regular convolutional layers in your
+CNN lab. - Add a 1x1 Convolution layer using the conv2d\_batchnorm()
+function. Remember that 1x1 Convolutions require a kernel and stride of
+1. - Add decoder blocks for the decoder layers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{fcn\PYZus{}model}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{num\PYZus{}classes}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} TODO Add Encoder Blocks. }
+             \PY{c+c1}{\PYZsh{} Remember that with each encoder layer, the depth of your model (the number of filters) increases.}
+             \PY{n}{encoder\PYZus{}1} \PY{o}{=} \PY{n}{encoder\PYZus{}block}\PY{p}{(}\PY{n}{inputs}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,}\PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{encoder\PYZus{}2} \PY{o}{=} \PY{n}{encoder\PYZus{}block}\PY{p}{(}\PY{n}{encoder\PYZus{}1}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{encoder\PYZus{}3} \PY{o}{=} \PY{n}{encoder\PYZus{}block}\PY{p}{(}\PY{n}{encoder\PYZus{}2}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} TODO Add 1x1 Convolution layer using conv2d\PYZus{}batchnorm().}
+             \PY{n}{oneto1\PYZus{}convo} \PY{o}{=} \PY{n}{conv2d\PYZus{}batchnorm}\PY{p}{(}\PY{n}{encoder\PYZus{}3}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,}\PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{strides} \PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} TODO: Add the same number of Decoder Blocks as the number of Encoder Blocks}
+             \PY{n}{decoder\PYZus{}3} \PY{o}{=} \PY{n}{decoder\PYZus{}block}\PY{p}{(}\PY{n}{oneto1\PYZus{}convo}\PY{p}{,}\PY{n}{encoder\PYZus{}2}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}
+             \PY{n}{decoder\PYZus{}2} \PY{o}{=} \PY{n}{decoder\PYZus{}block}\PY{p}{(}\PY{n}{decoder\PYZus{}3}\PY{p}{,}\PY{n}{encoder\PYZus{}1}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}
+             \PY{n}{decoder\PYZus{}1} \PY{o}{=} \PY{n}{decoder\PYZus{}block}\PY{p}{(}\PY{n}{decoder\PYZus{}2}\PY{p}{,}\PY{n}{inputs}\PY{p}{,}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{)}
+             
+             \PY{n}{x} \PY{o}{=} \PY{n}{decoder\PYZus{}1}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{returned layers.Conv2D of fcn\PYZus{}model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} The function returns the output layer of your model. \PYZdq{}x\PYZdq{} is the final layer obtained from the last decoder\PYZus{}block()}
+             \PY{k}{return} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{num\PYZus{}classes}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Training }\label{training}
+
+The following cells will use the FCN you created and define an ouput
+layer based on the size of the processed image and the number of classes
+recognized. You will define the hyperparameters to compile and train
+your model.
+
+Please Note: For this project, the helper code in
+\texttt{data\_iterator.py} will resize the copter images to 160x160x3 to
+speed up training.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{DON\PYZsq{}T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{image\PYZus{}hw} \PY{o}{=} \PY{l+m+mi}{160}
+         \PY{n}{image\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{n}{image\PYZus{}hw}\PY{p}{,} \PY{n}{image\PYZus{}hw}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{inputs} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Input}\PY{p}{(}\PY{n}{image\PYZus{}shape}\PY{p}{)}
+         \PY{n}{num\PYZus{}classes} \PY{o}{=} \PY{l+m+mi}{3}
+         
+         \PY{c+c1}{\PYZsh{} Call fcn\PYZus{}model()}
+         \PY{n}{output\PYZus{}layer} \PY{o}{=} \PY{n}{fcn\PYZus{}model}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{num\PYZus{}classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned output\_layer of separable\_conv2d
+returned layers.Conv2D of fcn\_model
+
+    \end{Verbatim}
+
+    \subsubsection{Hyperparameters}\label{hyperparameters}
+
+Define and tune your hyperparameters. - \textbf{batch\_size}: number of
+training samples/images that get propagated through the network in a
+single pass. - \textbf{num\_epochs}: number of times the entire training
+dataset gets propagated through the network. -
+\textbf{steps\_per\_epoch}: number of batches of training images that go
+through the network in 1 epoch. We have provided you with a default
+value. One recommended value to try would be based on the total number
+of images in training dataset divided by the batch\_size. -
+\textbf{validation\_steps}: number of batches of validation images that
+go through the network in 1 epoch. This is similar to steps\_per\_epoch,
+except validation\_steps is for the validation dataset. We have provided
+you with a default value for this as well. - \textbf{workers}: maximum
+number of processes to spin up. This can affect your training speed and
+is dependent on your hardware. We have provided a recommended value to
+work with.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{64} 
+         \PY{n}{num\PYZus{}epochs} \PY{o}{=} \PY{l+m+mi}{20}
+         \PY{n}{steps\PYZus{}per\PYZus{}epoch} \PY{o}{=} \PY{l+m+mi}{400}
+         \PY{n}{validation\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{50}
+         \PY{n}{workers} \PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{DON\PYZsq{}T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} Define the Keras model and compile it for training}
+         \PY{n}{model} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{inputs}\PY{p}{,} \PY{n}{outputs}\PY{o}{=}\PY{n}{output\PYZus{}layer}\PY{p}{)}
+         
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Data iterators for loading the training and validation data}
+         \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{n}{data\PYZus{}iterator}\PY{o}{.}\PY{n}{BatchIteratorSimple}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                                                        \PY{n}{data\PYZus{}folder}\PY{o}{=}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                                                        \PY{n}{image\PYZus{}shape}\PY{o}{=}\PY{n}{image\PYZus{}shape}\PY{p}{,}
+                                                        \PY{n}{shift\PYZus{}aug}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{val\PYZus{}iter} \PY{o}{=} \PY{n}{data\PYZus{}iterator}\PY{o}{.}\PY{n}{BatchIteratorSimple}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                                                      \PY{n}{data\PYZus{}folder}\PY{o}{=}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{validation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                                                      \PY{n}{image\PYZus{}shape}\PY{o}{=}\PY{n}{image\PYZus{}shape}\PY{p}{)}
+         
+         \PY{n}{logger\PYZus{}cb} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{LoggerPlotter}\PY{p}{(}\PY{p}{)}
+         \PY{n}{callbacks} \PY{o}{=} \PY{p}{[}\PY{n}{logger\PYZus{}cb}\PY{p}{]}
+         
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit\PYZus{}generator}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{p}{,}
+                             \PY{n}{steps\PYZus{}per\PYZus{}epoch} \PY{o}{=} \PY{n}{steps\PYZus{}per\PYZus{}epoch}\PY{p}{,} \PY{c+c1}{\PYZsh{} the number of batches per epoch,}
+                             \PY{n}{epochs} \PY{o}{=} \PY{n}{num\PYZus{}epochs}\PY{p}{,} \PY{c+c1}{\PYZsh{} the number of epochs to train for,}
+                             \PY{n}{validation\PYZus{}data} \PY{o}{=} \PY{n}{val\PYZus{}iter}\PY{p}{,} \PY{c+c1}{\PYZsh{} validation iterator}
+                             \PY{n}{validation\PYZus{}steps} \PY{o}{=} \PY{n}{validation\PYZus{}steps}\PY{p}{,} \PY{c+c1}{\PYZsh{} the number of batches to validate on}
+                             \PY{n}{callbacks}\PY{o}{=}\PY{n}{callbacks}\PY{p}{,}
+                             \PY{n}{workers} \PY{o}{=} \PY{n}{workers}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0761
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 404s - loss: 0.0760 - val\_loss: 0.0854
+Epoch 2/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0280
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 402s - loss: 0.0280 - val\_loss: 0.0392
+Epoch 3/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0242
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0241 - val\_loss: 0.0357
+Epoch 4/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0207
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0207 - val\_loss: 0.0300
+Epoch 5/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0196
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0196 - val\_loss: 0.0271
+Epoch 6/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0182
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0182 - val\_loss: 0.0545
+Epoch 7/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0166
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0166 - val\_loss: 0.0427
+Epoch 8/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0166
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 400s - loss: 0.0166 - val\_loss: 0.0308
+Epoch 9/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0153
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0153 - val\_loss: 0.0251
+Epoch 10/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0156
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 400s - loss: 0.0156 - val\_loss: 0.0439
+Epoch 11/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0145
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 402s - loss: 0.0145 - val\_loss: 0.0618
+Epoch 12/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0145
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_23.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 402s - loss: 0.0145 - val\_loss: 0.0236
+Epoch 13/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0126
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_25.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 400s - loss: 0.0126 - val\_loss: 0.0238
+Epoch 14/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0132
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_27.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 399s - loss: 0.0132 - val\_loss: 0.0306
+Epoch 15/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0135
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_29.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0135 - val\_loss: 0.0309
+Epoch 16/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0135
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_31.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 399s - loss: 0.0135 - val\_loss: 0.0277
+Epoch 17/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0115
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_33.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0115 - val\_loss: 0.0261
+Epoch 18/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0156
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_35.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 403s - loss: 0.0156 - val\_loss: 0.0262
+Epoch 19/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0131
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_37.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 402s - loss: 0.0131 - val\_loss: 0.0246
+Epoch 20/20
+399/400 [============================>.] - ETA: 0s - loss: 0.0123
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_39.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+400/400 [==============================] - 401s - loss: 0.0123 - val\_loss: 0.0282
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <tensorflow.contrib.keras.python.keras.callbacks.History at 0x7fec40cb7128>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} Save your trained model weights}
+         \PY{n}{weight\PYZus{}file\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}weights}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{model\PYZus{}tools}\PY{o}{.}\PY{n}{save\PYZus{}network}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{weight\PYZus{}file\PYZus{}name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Prediction }\label{prediction}
+
+Now that you have your model trained and saved, you can make predictions
+on your validation dataset. These predictions can be compared to the
+mask images, which are the ground truth labels, to evaluate how well
+your model is doing under different conditions.
+
+There are three different predictions available from the helper code
+provided: - \textbf{patrol\_with\_targ}: Test how well the network can
+detect the hero from a distance. - \textbf{patrol\_non\_targ}: Test how
+often the network makes a mistake and identifies the wrong person as the
+target. - \textbf{following\_images}: Test how well the network can
+identify the target while following them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{} If you need to load a model which you previously trained you can uncomment the codeline that calls the function below.}
+         
+         \PY{c+c1}{\PYZsh{} weight\PYZus{}file\PYZus{}name = \PYZsq{}model\PYZus{}weights\PYZsq{}}
+         \PY{c+c1}{\PYZsh{} model = model\PYZus{}tools.load\PYZus{}network(weight\PYZus{}file\PYZus{}name)}
+\end{Verbatim}
+
+
+    The following cell will write predictions to files and return paths to
+the appropriate directories. The \texttt{run\_num} parameter is used to
+define or group all the data for a particular model run. You can change
+it for different runs. For example, 'run\_1', 'run\_2' etc.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{run\PYZus{}num} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{run\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{run\PYZus{}num}\PY{p}{)}
+         
+         \PY{n}{val\PYZus{}with\PYZus{}targ}\PY{p}{,} \PY{n}{pred\PYZus{}with\PYZus{}targ} \PY{o}{=} \PY{n}{model\PYZus{}tools}\PY{o}{.}\PY{n}{write\PYZus{}predictions\PYZus{}grade\PYZus{}set}\PY{p}{(}\PY{n}{model}\PY{p}{,}
+                                                 \PY{n}{run\PYZus{}num}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patrol\PYZus{}with\PYZus{}targ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}evaluation\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         
+         \PY{n}{val\PYZus{}no\PYZus{}targ}\PY{p}{,} \PY{n}{pred\PYZus{}no\PYZus{}targ} \PY{o}{=} \PY{n}{model\PYZus{}tools}\PY{o}{.}\PY{n}{write\PYZus{}predictions\PYZus{}grade\PYZus{}set}\PY{p}{(}\PY{n}{model}\PY{p}{,} 
+                                                 \PY{n}{run\PYZus{}num}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patrol\PYZus{}non\PYZus{}targ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}evaluation\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         
+         \PY{n}{val\PYZus{}following}\PY{p}{,} \PY{n}{pred\PYZus{}following} \PY{o}{=} \PY{n}{model\PYZus{}tools}\PY{o}{.}\PY{n}{write\PYZus{}predictions\PYZus{}grade\PYZus{}set}\PY{p}{(}\PY{n}{model}\PY{p}{,}
+                                                 \PY{n}{run\PYZus{}num}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{following\PYZus{}images}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}evaluation\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+run\_1
+
+    \end{Verbatim}
+
+    Now lets look at your predictions, and compare them to the ground truth
+labels and original images. Run each of the following cells to visualize
+some sample images from the predictions in the validation set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} images while following the target}
+         \PY{n}{im\PYZus{}files} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{get\PYZus{}im\PYZus{}file\PYZus{}sample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}evaluation\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{following\PYZus{}images}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{run\PYZus{}num}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{im\PYZus{}files}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{im\PYZus{}tuple} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{load\PYZus{}images}\PY{p}{(}\PY{n}{im\PYZus{}files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{show\PYZus{}images}\PY{p}{(}\PY{n}{im\PYZus{}tuple}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} images while at patrol without target}
+         \PY{n}{im\PYZus{}files} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{get\PYZus{}im\PYZus{}file\PYZus{}sample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}evaluation\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patrol\PYZus{}non\PYZus{}targ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{run\PYZus{}num}\PY{p}{)} 
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{im\PYZus{}tuple} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{load\PYZus{}images}\PY{p}{(}\PY{n}{im\PYZus{}files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{show\PYZus{}images}\PY{p}{(}\PY{n}{im\PYZus{}tuple}\PY{p}{)}
+          
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:}    
+         \PY{c+c1}{\PYZsh{} images while at patrol with target}
+         \PY{n}{im\PYZus{}files} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{get\PYZus{}im\PYZus{}file\PYZus{}sample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}evaluation\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patrol\PYZus{}with\PYZus{}targ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{run\PYZus{}num}\PY{p}{)} 
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{im\PYZus{}tuple} \PY{o}{=} \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{load\PYZus{}images}\PY{p}{(}\PY{n}{im\PYZus{}files}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plotting\PYZus{}tools}\PY{o}{.}\PY{n}{show\PYZus{}images}\PY{p}{(}\PY{n}{im\PYZus{}tuple}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Evaluation }\label{evaluation}
+
+Evaluate your model! The following cells include several different
+scores to help you evaluate your model under the different conditions
+discussed during the Prediction step.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{} Scores for while the quad is following behind the target. }
+         \PY{n}{true\PYZus{}pos1}\PY{p}{,} \PY{n}{false\PYZus{}pos1}\PY{p}{,} \PY{n}{false\PYZus{}neg1}\PY{p}{,} \PY{n}{iou1} \PY{o}{=} \PY{n}{scoring\PYZus{}utils}\PY{o}{.}\PY{n}{score\PYZus{}run\PYZus{}iou}\PY{p}{(}\PY{n}{val\PYZus{}following}\PY{p}{,} \PY{n}{pred\PYZus{}following}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+number of validation samples intersection over the union evaulated on 542
+average intersection over union for background is 0.995401526759129
+average intersection over union for other people is 0.38873147789004103
+average intersection over union for the hero is 0.9067416293826881
+number true positives: 538, number false positives: 0, number false negatives: 1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{} Scores for images while the quad is on patrol and the target is not visable}
+         \PY{n}{true\PYZus{}pos2}\PY{p}{,} \PY{n}{false\PYZus{}pos2}\PY{p}{,} \PY{n}{false\PYZus{}neg2}\PY{p}{,} \PY{n}{iou2} \PY{o}{=} \PY{n}{scoring\PYZus{}utils}\PY{o}{.}\PY{n}{score\PYZus{}run\PYZus{}iou}\PY{p}{(}\PY{n}{val\PYZus{}no\PYZus{}targ}\PY{p}{,} \PY{n}{pred\PYZus{}no\PYZus{}targ}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+number of validation samples intersection over the union evaulated on 270
+average intersection over union for background is 0.9880314937059335
+average intersection over union for other people is 0.774284109776741
+average intersection over union for the hero is 0.0
+number true positives: 0, number false positives: 37, number false negatives: 0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} This score measures how well the neural network can detect the target from far away}
+         \PY{n}{true\PYZus{}pos3}\PY{p}{,} \PY{n}{false\PYZus{}pos3}\PY{p}{,} \PY{n}{false\PYZus{}neg3}\PY{p}{,} \PY{n}{iou3} \PY{o}{=} \PY{n}{scoring\PYZus{}utils}\PY{o}{.}\PY{n}{score\PYZus{}run\PYZus{}iou}\PY{p}{(}\PY{n}{val\PYZus{}with\PYZus{}targ}\PY{p}{,} \PY{n}{pred\PYZus{}with\PYZus{}targ}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+number of validation samples intersection over the union evaulated on 322
+average intersection over union for background is 0.9964219235364836
+average intersection over union for other people is 0.4831969930231386
+average intersection over union for the hero is 0.23137406706819047
+number true positives: 119, number false positives: 1, number false negatives: 182
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{c+c1}{\PYZsh{} Sum all the true positives, etc from the three datasets to get a weight for the score}
+         \PY{n}{true\PYZus{}pos} \PY{o}{=} \PY{n}{true\PYZus{}pos1} \PY{o}{+} \PY{n}{true\PYZus{}pos2} \PY{o}{+} \PY{n}{true\PYZus{}pos3}
+         \PY{n}{false\PYZus{}pos} \PY{o}{=} \PY{n}{false\PYZus{}pos1} \PY{o}{+} \PY{n}{false\PYZus{}pos2} \PY{o}{+} \PY{n}{false\PYZus{}pos3}
+         \PY{n}{false\PYZus{}neg} \PY{o}{=} \PY{n}{false\PYZus{}neg1} \PY{o}{+} \PY{n}{false\PYZus{}neg2} \PY{o}{+} \PY{n}{false\PYZus{}neg3}
+         
+         \PY{n}{weight} \PY{o}{=} \PY{n}{true\PYZus{}pos}\PY{o}{/}\PY{p}{(}\PY{n}{true\PYZus{}pos}\PY{o}{+}\PY{n}{false\PYZus{}neg}\PY{o}{+}\PY{n}{false\PYZus{}pos}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{weight}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.7482915717539863
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+c1}{\PYZsh{} The IoU for the dataset that never includes the hero is excluded from grading}
+         \PY{n}{final\PYZus{}IoU} \PY{o}{=} \PY{p}{(}\PY{n}{iou1} \PY{o}{+} \PY{n}{iou3}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{final\PYZus{}IoU}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.569057848225
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{} And the final grade score is }
+         \PY{n}{final\PYZus{}score} \PY{o}{=} \PY{n}{final\PYZus{}IoU} \PY{o}{*} \PY{n}{weight}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{final\PYZus{}score}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.425821191668
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
